@@ -1,0 +1,136 @@
+---
+title: "Data Wrangling with `dplyr`"
+author: "Aleksandra Wilczynska"
+format: 
+  revealjs:
+    footer: "Data Carpentry for Social Sciences & Humanities"
+    chalkboard: true
+    incremental: true   
+    theme: [default, custom.scss]
+---
+
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(here)
+
+interviews <- read_csv(here("data", "SAFI_clean.csv"), na = "NULL")
+
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE
+  )
+```
+
+## Intro
+
+## What is data manipulation?
+
+## Exercise 1: `r emo::ji("clock")` **3 mins**
+
+::: {.nonincremental}
+- subset the `interviews` data to include interviews where respondents were members of an irrigation association (`memb_assoc`); 
+- retain only the columns `affect_conflicts`, `liv_count`, and `no_meals`;
+- use pipes!
+:::
+
+```{r}
+#| echo: false
+#| cache: false
+countdown::countdown(minutes = 3)
+```
+
+. . .
+
+```{r}
+#| eval: false
+interviews %>%
+    filter(memb_assoc == "yes") %>%
+    select(affect_conflicts, liv_count, no_meals)
+```
+
+. . . 
+
+
+Can you reverse the order of operations? Why? 
+
+
+
+
+## Exercise 2: `r emo::ji("clock")` **5 mins**
+
+Create a new dataframe from the `interviews` data that meets the following criteria:contains only the `village` column and a new column called `total_meals`,containing a value that is equal to the total number of meals served in the household per day on average (`no_membrs` times `no_meals`). Only the rows where `total_meals` is greater than 20 should be shown in the final dataframe.
+
+
+```{r}
+#| echo: false
+#| cache: false
+countdown::countdown(minutes = 5)
+```
+
+. . .
+
+```{r}
+#| eval: false
+
+interviews %>%
+    mutate(total_meals = no_membrs * no_meals) %>%
+    filter(total_meals > 20) %>%
+    select(village, total_meals)
+```
+
+## Exercise 2: `r emo::ji("clock")` **7 mins**
+
+:::{.nonincremental}
+1) How many households in the survey have an average of **two meals per day**? **Three meals per day**? Are there any other numbers of meals represented?
+
+2) Use `group_by()` and `summarize()` to **find the mean, min, and max number of household members for each village**. Also add the number of observations (hint: see `?n`).
+
+```{r}
+#| echo: false
+#| cache: false
+countdown::countdown(minutes = 7)
+```
+:::
+
+
+## Coffee break
+
+![](img/coffee_cup_coffee_time.png)
+
+
+## Solution
+
+How many households in the survey have an average of **two meals per day**? 
+
+```{r}
+#| eval: false
+
+interviews %>%
+   count(no_meals)
+```
+
+
+**Find the mean, min, and max number of household members for each village**. Add the number of observations.
+
+```{r}
+#| eval: false
+
+interviews %>%
+  group_by(village) %>%
+  summarize(
+      mean_no_membrs = mean(no_membrs),
+      min_no_membrs = min(no_membrs),
+      max_no_membrs = max(no_membrs),
+      n = n()
+  )
+``` 
+
+## Exporting SAFI data
+
+

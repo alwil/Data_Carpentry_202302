@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Aleksandra Wilczynska">
+
+<title>Notes for Data Wrangling Course</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="notes_dplyr_files/libs/clipboard/clipboard.min.js"></script>
+<script src="notes_dplyr_files/libs/quarto-html/quarto.js"></script>
+<script src="notes_dplyr_files/libs/quarto-html/popper.min.js"></script>
+<script src="notes_dplyr_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="notes_dplyr_files/libs/quarto-html/anchor.min.js"></script>
+<link href="notes_dplyr_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="notes_dplyr_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="notes_dplyr_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="notes_dplyr_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="notes_dplyr_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Notes for Data Wrangling Course</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Aleksandra Wilczynska </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="before-starting-teaching" class="level1">
+<h1>Before starting teaching</h1>
+<ul>
+<li>Wait until the other instructor stops teaching ( check with them)</li>
+<li>Go to the repository folder: <code>/path/to/my/repo/folder</code></li>
+<li>Pull the changes (<code>git pull</code>)</li>
+<li>Add <a href="https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase">SSH agent</a>: <code>eval $(ssh-agent)</code>, followed by <code>ssh-add</code> in your terminal</li>
+<li>In terminal, start observing the folder : <code>gitautopush</code></li>
+<li>Save changes often with <code>Ctrl+S</code></li>
+<li>Once you finished, close <code>gitautopush</code> with <code>Ctrl+C</code></li>
+</ul>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<ul>
+<li>Introduce myself (slide?)</li>
+<li>Remind of github repository
+<ul>
+<li>I will create a new script <code>data-wrangling.R</code> in <code>scripts</code> folder! -refresh to see the code</li>
+</ul></li>
+<li>I will avoid long comments
+<ul>
+<li>the notes are to catch-up if you’re lost</li>
+<li>you will find more explanation on Data Carpentry website</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-wrangling-with-dplyr-1045---1145" class="level1">
+<h1>Data Wrangling with dplyr 10:45 - 11:45</h1>
+<ul>
+<li><p><code>dplyr</code> - package with many useful functions used for data wrangling / data manipulation. (slide)</p></li>
+<li><p><code>dplyr</code> comes with the <code>tidyverse</code> suite , so if you have <code>tidyverse</code> package installed and loaded, you already have <code>dplyr</code> available for you.</p></li>
+<li><p>I am now starting my work with R, so I will need to load the <code>tidyverse</code> and <code>here</code> libraries.</p></li>
+</ul>
+<section id="load-packages-and-save-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages-and-save-the-dataset">Load packages and save the dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## load the tidyverse</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># If you haven't downloaded the file:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#download.file("https://ndownloader.figshare.com/files/11492171",</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#              "data/SAFI_clean.csv", mode = "wb")</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign data to the object</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>interviews <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"SAFI_clean.csv"</span>), <span class="at">na =</span> <span class="st">"NULL"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># preview the data</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># view(interviews)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="selecting-columns-and-filtering-rows" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-columns-and-filtering-rows">Selecting columns and filtering rows</h2>
+<section id="subsetting-by-columns" class="level3">
+<h3 class="anchored" data-anchor-id="subsetting-by-columns">Subsetting by columns</h3>
+<p>Use if you want to choose only specific columns in the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select subset of columns </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(interviews, village, no_membrs, months_lack_food)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># do the same with subsetting </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>interviews[<span class="fu">c</span>(<span class="st">"village"</span>, <span class="st">"no_membrs"</span>, <span class="st">"months_lack_food"</span>)]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to select a series of columns placed next to each other</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(interviews, village<span class="sc">:</span>respondent_wall_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="subsetting-by-rows" class="level3">
+<h3 class="anchored" data-anchor-id="subsetting-by-rows">Subsetting by rows</h3>
+<p>Use if you want to filter your dataset by a specific condition (e.g.&nbsp;you’re only interested in observations from a certain location, or time period).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep only observations where village name is "Chirodzo"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(interviews, village <span class="sc">==</span> <span class="st">"Chirodzo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="multiple-conditions" class="level4">
+<h4 class="anchored" data-anchor-id="multiple-conditions">Multiple conditions</h4>
+<p>You can also use <code>filter</code> function if you want to apply multiple conditions (e.g.&nbsp;only interested from a certain location in a certain time period).</p>
+<p>There are two ways two apply multiple conditions to a dataset: using either <code>AND</code> or <code>OR</code> statement.</p>
+<ul>
+<li><code>AND</code> statement means that <strong>all</strong> of the criteria needs to be fulfiled</li>
+<li><code>OR</code> statement means that <strong>at least one</strong> of the criteria needs to be fulfiled.</li>
+</ul>
+<p>You have heard already about the <code>&amp;</code> and <code>|</code> logical operators. We will use them to filter by multiple conditions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filtering with AND statement </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(interviews, village <span class="sc">==</span> <span class="st">"Chirodzo"</span> <span class="sc">&amp;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                   rooms <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                   no_meals <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Note: <code>filter</code> function allows using comas (<code>,</code>) instead of the <code>&amp;</code> logical operator for the <code>AND</code> statement, but I don’t recommend it - better to be explicit about what you’re trying to do.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filtering with OR statement </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(interviews, village <span class="sc">==</span> <span class="st">"Chirodzo"</span> <span class="sc">|</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                   rooms <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">|</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                   no_meals <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="pipes" class="level2">
+<h2 class="anchored" data-anchor-id="pipes">Pipes</h2>
+<p>What if you want to select and filter at the same time (often the case)?</p>
+<ul>
+<li>You can do it in intermediate steps:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter &amp; select with intermediate steps</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>interviews_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(interviews, village <span class="sc">==</span> <span class="st">"Chirodzo"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>interviews_ch <span class="ot">&lt;-</span> <span class="fu">select</span>(interviews_2, village<span class="sc">:</span>respondent_wall_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="alert alert-warning">
+<ul>
+<li>Clutter up workspace</li>
+<li>Multiple steps, hard to keep track</li>
+</ul>
+</div>
+<ul>
+<li>You can also nest functions (i.e.&nbsp;one function inside of another), like this:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>interviews_ch <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="fu">filter</span>(interviews, village <span class="sc">==</span> <span class="st">"Chirodzo"</span>),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                         village<span class="sc">:</span>respondent_wall_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="alert alert-warning">
+<ul>
+<li>Difficult to read</li>
+</ul>
+</div>
+<ul>
+<li>The third option is to use pipes.</li>
+</ul>
+<p>Pipes let you take the output of one function and send it directly to the next:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>interviews_ch <span class="ot">&lt;-</span> interviews <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(village <span class="sc">==</span> <span class="st">"Chirodzo"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(village<span class="sc">:</span>respondent_wall_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="alert alert-info">
+<ul>
+<li>Allows you to build your clean data set iteratively</li>
+<li>Avoids storing intermediate steps</li>
+<li>Has a clean, easy to read syntax</li>
+</ul>
+</div>
+<p>Pipes passes the object on the <code>LHS</code> to <code>RHS</code>. Therefore, it is not needed to mention the dataset within the call of <code>select()</code> or <code>filter</code> functions.</p>
+<p>As the order of the operations using pipe is from left to right, it is useful to read the pipe as <strong>AND THEN</strong>.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+There are different pipes!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>The original pipe used in the <code>tidyverse</code> style is <code>%&gt;%</code> . It comes from the <code>magrittr</code> package loaded automatically with <code>dplyr</code>.</p></li>
+<li><p>Recently, a new pipe <code>&gt;|</code> has been added to the <code>base</code> R. It means that you don’t need to load any additional packages to use it - it comes with R installation.</p></li>
+</ul>
+<p>Although its behaviour varies in details, they work in a very similar way. I will be using old pipe ( <code>%&gt;%</code>), but note that the <code>|&gt;</code> notation has becoming more and more popular.</p>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Keyboard shortcut
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In RStudio you can use keyboard shortcut <kbd><code>Ctrl</code></kbd> + <kbd><code>Shift</code></kbd> + <kbd><code>M</code></kbd> ( or <code>Cmd</code> + <kbd><code>Shift</code></kbd> + <kbd><code>M</code></kbd> in Mac) to write <code>%&gt;%</code></p>
+</div>
+</div>
+</section>
+<section id="exercise---pipes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise---pipes">Exercise - Pipes</h2>
+<p>(slide)</p>
+<p>Using pipes, subset the <code>interviews</code> data to include interviews where respondents were members of an irrigation association (<code>memb_assoc</code>) and retain only the columns <code>affect_conflicts</code>, <code>liv_count</code>, and <code>no_meals</code>.</p>
+<section id="solution" class="level3">
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(memb_assoc <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(affect_conflicts, liv_count, no_meals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Bonus question</strong> What if you reverse the order of operations?</p>
+</section>
+</section>
+<section id="mutate" class="level2">
+<h2 class="anchored" data-anchor-id="mutate">Mutate</h2>
+<p>Frequently you’ll want to create new columns based on the values in existing columns, for example to do unit conversions, or to find the ratio of values in two columns. For this we’ll use <code>mutate()</code>.</p>
+<p>We’ll calculate an average number of household members per room:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average number of household members per room</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can chain the mutate operation with other <code>dplyr</code> functions, using pipe.</p>
+<p>Let’s say, in our analysis we’re interested in being a member of an irrigation association (<code>memb_assoc</code>). For this we are only interested in the cases that have information about this variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out cases with missing values and calculate average</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Function <code>is.na()</code> returns logical values <code>TRUE</code> if value is missing ( <code>NA</code>) and <code>FALSE</code> otherwise.</li>
+<li>The <code>!</code> symbol denotes negation, i.e.&nbsp;set in front of a logical value, it negates it.</li>
+<li>So you can read <code>!is.na()</code> as “is not missing”.</li>
+<li>The filtering keeps only “non missing cases of <code>memb_assoc</code></li>
+</ul>
+</section>
+<section id="exercise---mutate" class="level2">
+<h2 class="anchored" data-anchor-id="exercise---mutate">Exercise - Mutate</h2>
+<p>(slide)</p>
+<p>Create a new dataframe from the <code>interviews</code> data that meets the following criteria: contains only the <code>village</code> column and a new column called <code>total_meals</code> containing a value that is equal to the total number of meals served in the household per day on average (<code>no_membrs</code> times <code>no_meals</code>). Only the rows where <code>total_meals</code> is greater than 20 should be shown in the final dataframe.</p>
+<section id="solution-1" class="level3">
+<h3 class="anchored" data-anchor-id="solution-1">Solution</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>interviews_total_meals <span class="ot">&lt;-</span> interviews <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_meals =</span> no_membrs <span class="sc">*</span> no_meals) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(total_meals <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(village, total_meals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="split-apply-combine" class="level2">
+<h2 class="anchored" data-anchor-id="split-apply-combine">Split-apply-combine</h2>
+<p>When conducting analysis, instead of filtering only one group of interest ( e.g.&nbsp;only one village), we often like to see how results differ per group. To do that you can use the <em>split-apply-combine</em> approach: - split the data into groups, - apply some analysis to each group - and then combine the results.</p>
+<ul>
+<li><code>dplyr</code> has a very useful function for this: <code>group_by()</code>.</li>
+<li><code>group_by()</code> is often used with <code>summarise()</code></li>
+<li><code>summarise()</code> provides a single value summary per each element of a group</li>
+</ul>
+<section id="summarise" class="level3">
+<h3 class="anchored" data-anchor-id="summarise">Summarise</h3>
+<p>Let’s say we want to calculate the average household size by village:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average household size by village</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(village) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also group by multiple columns ;</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average household size by village and assoc membership</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can see that there are some missing values in the <code>memb_assoc</code>. We can remove them with the filtering step that we used before:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can also make multiple calculations at the same time:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multiple calculations</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_membrs =</span> <span class="fu">min</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You might to sort your results by the calculation you’ve just made:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort by result of calculation</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_membrs =</span> <span class="fu">min</span>(no_membrs))  <span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(min_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="counting" class="level3">
+<h3 class="anchored" data-anchor-id="counting">Counting</h3>
+<p>To find number of observations per group</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of observations per village</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(village)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can sort by the result</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># same, sorted</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(village, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="exercise---count-summarize" class="level2">
+<h2 class="anchored" data-anchor-id="exercise---count-summarize">Exercise - Count + summarize</h2>
+<p>(slide) 1) How many households in the survey have an average of <strong>two meals per day</strong>? <strong>Three meals per day</strong>? Are there any other numbers of meals represented?</p>
+<ol start="2" type="1">
+<li>Use <code>group_by()</code> and <code>summarize()</code> to find the mean, min, and max number of household members for each village. Also add the number of observations (hint: see <code>?n</code>).</li>
+</ol>
+</section>
+</section>
+<section id="coffee-break-1145---1200" class="level1">
+<h1>Coffee break! 11:45 - 12:00</h1>
+<p>(slide)</p>
+</section>
+<section id="data-wrangling-with-tidyr-1200---1250" class="level1">
+<h1>Data wrangling with tidyr 12:00 - 12:50</h1>
+<section id="solutions-count-summarize-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="solutions-count-summarize-exercises">Solutions Count + summarize exercises</h2>
+<section id="solution-2" class="level3">
+<h3 class="anchored" data-anchor-id="solution-2">Solution</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">count</span>(no_meals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(village) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">min_no_membrs =</span> <span class="fu">min</span>(no_membrs),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">max_no_membrs =</span> <span class="fu">max</span>(no_membrs),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="reshaping-with-pivot_wider-and-pivot_longer" class="level2">
+<h2 class="anchored" data-anchor-id="reshaping-with-pivot_wider-and-pivot_longer">Reshaping with pivot_wider() and pivot_longer()</h2>
+</section>
+<section id="cleaning-exporting-safi-data" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning-exporting-safi-data">Cleaning + exporting SAFI data</h2>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,360 @@
+---
+title: "Notes for Data Wrangling Course"
+author: "Aleksandra Wilczynska"
+format: html
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  eval = FALSE
+  )
+```
+
+# Before starting teaching
+- Wait until the other instructor stops teaching ( check with them)
+- Go to the repository folder: `/path/to/my/repo/folder` 
+- Pull the changes (`git pull`)
+- Add [SSH agent](https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase):  `eval $(ssh-agent)`,  followed by `ssh-add` in your terminal
+- In terminal, start observing the folder : `gitautopush`
+- Save changes often with `Ctrl+S`
+- Once you finished, close `gitautopush` with `Ctrl+C`  
+
+# Introduction
+
+- Introduce myself (slide?)
+- Remind of github repository 
+   - I will create a new script `data-wrangling.R` in `scripts` folder!
+   -refresh to see the code
+- I will avoid long comments  
+   - the notes are to catch-up if you're lost 
+   - you will find more explanation on Data Carpentry website
+
+
+# Data Wrangling with dplyr 10:45 - 11:45
+
+- `dplyr` - package with many useful functions used for data wrangling / data manipulation. (slide)
+
+- `dplyr` comes with the `tidyverse` suite , so if you have `tidyverse` package installed and loaded, you already have `dplyr` available for you. 
+- I am now starting my work with R, so I will need to load the `tidyverse` and `here` libraries.
+
+## Load packages and save the dataset
+
+```{r}
+## load the tidyverse
+library(tidyverse)
+library(here)
+
+# If you haven't downloaded the file:
+#download.file("https://ndownloader.figshare.com/files/11492171",
+#              "data/SAFI_clean.csv", mode = "wb")
+
+
+# Assign data to the object
+interviews <- read_csv(here("data", "SAFI_clean.csv"), na = "NULL")
+
+# preview the data
+# view(interviews)
+
+```
+
+## Selecting columns and filtering rows
+
+### Subsetting by columns 
+
+Use if you want to choose only specific columns in the dataset.
+
+```{r}
+# select subset of columns 
+select(interviews, village, no_membrs, months_lack_food)
+
+# do the same with subsetting 
+interviews[c("village", "no_membrs", "months_lack_food")]
+
+# to select a series of columns placed next to each other
+select(interviews, village:respondent_wall_type)
+
+```
+
+### Subsetting by rows
+
+Use if you want to filter your dataset by a specific condition (e.g. you're only interested in observations from a certain location, or time period).
+
+
+```{r}
+# keep only observations where village name is "Chirodzo"
+filter(interviews, village == "Chirodzo")
+```
+
+#### Multiple conditions
+You can also use `filter` function if you want to apply multiple conditions (e.g. only interested from a certain location in a certain time period).
+
+There are two ways two apply multiple conditions to a dataset:  using either `AND` or `OR` statement.
+
+- `AND` statement means that **all** of the criteria needs to be fulfiled
+- `OR` statement means that **at least one** of the criteria needs to be fulfiled.
+
+You have heard  already about the `&` and `|` logical operators. We will use them to filter by multiple conditions.
+
+```{r}
+# filtering with AND statement 
+filter(interviews, village == "Chirodzo" &
+                   rooms > 1 &
+                   no_meals > 2)
+
+```
+
+> Note: `filter` function allows using comas (`,`) instead of the `&` logical operator for the `AND` statement, but I don't recommend it  - better to be explicit about what you're trying to do.
+
+
+```{r}
+# filtering with OR statement 
+filter(interviews, village == "Chirodzo" |
+                   rooms > 1 |
+                   no_meals > 2)
+
+```
+
+## Pipes
+What if you want to select and filter at the same time (often the case)? 
+
+- You can do it in intermediate steps:
+```{r}
+# filter & select with intermediate steps
+interviews_2 <- filter(interviews, village == "Chirodzo")
+interviews_ch <- select(interviews_2, village:respondent_wall_type)
+```
+<div class="alert alert-warning">
+- Clutter up workspace
+- Multiple steps, hard to keep track
+</div>
+
+- You can also nest functions (i.e. one function inside of another), like this:
+```{r}
+interviews_ch <- select(filter(interviews, village == "Chirodzo"),
+                         village:respondent_wall_type)
+```
+<div class="alert alert-warning">
+- Difficult to read
+</div>
+
+- The third option is to use pipes. 
+
+Pipes let you take the output of one function and send it directly to the next:
+
+```{r}
+interviews_ch <- interviews %>%
+  filter(village == "Chirodzo") %>%
+  select(village:respondent_wall_type)
+```
+<div class="alert alert-info">
+- Allows you to build your clean data set iteratively
+- Avoids storing intermediate steps
+- Has a clean, easy to read syntax
+</div>
+
+Pipes passes the object on the `LHS` to `RHS`. Therefore, it is not needed to mention the dataset within the call of `select()` or `filter` functions. 
+
+As the order of the operations using pipe is from left to right, it is useful to read the pipe as **AND THEN**. 
+
+
+:::{.callout-tip}
+## There are different pipes!
+
+- The original pipe used in the `tidyverse` style is `%>%` . It comes from the `magrittr` package loaded automatically with `dplyr`.
+
+- Recently, a new pipe `>|` has been added to the `base` R. It means that you don't need to load any additional packages to use it - it comes with R installation. 
+
+Although its behaviour varies in details, they work in a very similar way. I will be using old pipe ( `%>%`), but note that  the `|>` notation has becoming more and more popular. 
+
+:::
+
+:::{.callout-tip}
+## Keyboard shortcut
+
+In RStudio you can use keyboard shortcut <kbd>`Ctrl`</kbd> + <kbd>`Shift`</kbd> + <kbd>`M`</kbd>  ( or `Cmd`</kbd> + <kbd>`Shift`</kbd> + <kbd>`M`</kbd> in Mac) to write `%>%`  
+
+:::
+
+## Exercise - Pipes
+(slide)
+
+Using pipes, subset the `interviews` data to include interviews where respondents were members of an irrigation association (`memb_assoc`) and retain only the columns `affect_conflicts`, `liv_count`, and `no_meals`.
+
+### Solution
+```{r}
+interviews %>%
+    filter(memb_assoc == "yes") %>%
+    select(affect_conflicts, liv_count, no_meals)
+```
+
+**Bonus question** What if you reverse the order of operations? 
+
+
+## Mutate
+Frequently you’ll want to create new columns based on the values in existing columns, for example to do unit conversions, or to find the ratio of values in two columns. For this we’ll use `mutate()`.  
+
+We'll calculate an average number of household members per room: 
+```{r}
+# average number of household members per room
+interviews %>%
+    mutate(people_per_room = no_membrs / rooms) 
+
+```
+
+We can chain the mutate operation with other `dplyr` functions, using pipe. 
+
+Let's say, in our analysis we're interested in being a member of an irrigation association (`memb_assoc`). 
+For this we are only interested in the cases that have information about this variable.
+
+```{r}
+# filter out cases with missing values and calculate average
+interviews %>%
+    filter(!is.na(memb_assoc)) %>%
+    mutate(people_per_room = no_membrs / rooms)
+
+```
+- Function `is.na()` returns logical values `TRUE` if value is  missing ( `NA`) and `FALSE` otherwise. 
+- The `!` symbol denotes negation, i.e. set in front of a logical value, it negates it.
+- So you can read `!is.na()` as "is not missing". 
+- The filtering keeps only "non missing cases of `memb_assoc`
+
+## Exercise - Mutate
+(slide)
+
+Create a new dataframe from the `interviews` data that meets the following criteria: contains only the `village` column and a new column called `total_meals` containing a value that is equal to the total number of meals served in the household per day on average (`no_membrs` times `no_meals`). Only the rows where `total_meals` is greater than 20 should be shown in the final dataframe.
+
+### Solution 
+
+```{r}
+interviews_total_meals <- interviews %>%
+    mutate(total_meals = no_membrs * no_meals) %>%
+    filter(total_meals > 20) %>%
+    select(village, total_meals)
+```
+
+## Split-apply-combine
+When conducting analysis, instead of filtering only one group of interest ( e.g. only one village), we often like to see how results differ per group. To do that you can use the *split-apply-combine* approach: 
+- split the data into groups, 
+- apply some analysis to each group
+- and then combine the results.
+
+
+- `dplyr` has a very useful function for this: `group_by()`.
+- `group_by()` is often used with `summarise()`
+- `summarise()` provides a single value summary per each element of a group
+
+### Summarise 
+
+Let's say we want to calculate the average household size by village:
+```{r}
+# average household size by village
+interviews %>% 
+  group_by(village) %>% 
+  summarize(mean_no_membrs = mean(no_membrs))
+```
+You can also group by multiple columns
+;
+
+```{r}
+# average household size by village and assoc membership
+interviews %>%
+    group_by(village, memb_assoc) %>%
+    summarize(mean_no_membrs = mean(no_membrs))
+
+```
+
+ We can see that there are some missing values in the `memb_assoc`. We can remove them with the filtering step that we used before: 
+ 
+```{r}
+# summarise
+interviews %>%
+    filter(!is.na(memb_assoc)) %>%
+    group_by(village, memb_assoc) %>%
+    summarize(mean_no_membrs = mean(no_membrs))
+```
+
+
+We can also make multiple calculations at the same time:
+ 
+```{r}
+# multiple calculations
+interviews %>%
+    filter(!is.na(memb_assoc)) %>%
+    group_by(village, memb_assoc) %>%
+    summarize(mean_no_membrs = mean(no_membrs),
+              min_membrs = min(no_membrs))
+```
+
+You might to sort your results by the calculation you've just made: 
+```{r}
+# sort by result of calculation
+interviews %>%
+    filter(!is.na(memb_assoc)) %>%
+    group_by(village, memb_assoc) %>%
+    summarize(mean_no_membrs = mean(no_membrs),
+              min_membrs = min(no_membrs))  %>%
+  arrange(desc(min_membrs))
+```
+
+### Counting
+
+To find number of observations per group
+```{r}
+# number of observations per village
+interviews %>%
+    count(village)
+```
+
+You can sort by the result
+```{r}
+# same, sorted
+interviews %>%
+    count(village, sort = TRUE)
+```
+
+## Exercise - Count + summarize
+(slide)
+
+1) How many households in the survey have an average of **two meals per day**? **Three meals per day**? Are there any other numbers of meals represented?
+
+2) Use `group_by()` and `summarize()` to find the mean, min, and max number of household members for each village. Also add the number of observations (hint: see `?n`).
+
+
+
+
+# Coffee break! 11:45 - 12:00
+(slide)
+
+# Data wrangling with  tidyr 12:00 - 12:50
+
+## Solutions Count + summarize exercises
+
+### Solution
+```{r}
+interviews %>%
+   count(no_meals)
+```
+
+```{r}
+interviews %>%
+  group_by(village) %>%
+  summarize(
+      mean_no_membrs = mean(no_membrs),
+      min_no_membrs = min(no_membrs),
+      max_no_membrs = max(no_membrs),
+      n = n()
+  )
+```
+## Reshaping with pivot_wider() and pivot_longer()
+
+
+## Cleaning + exporting SAFI data
+
+
