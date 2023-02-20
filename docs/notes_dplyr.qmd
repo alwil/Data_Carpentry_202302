@@ -1,7 +1,10 @@
 ---
 title: "Notes for Data Wrangling Course"
 author: "Aleksandra Wilczynska"
-format: html
+format: 
+  html:
+    toc: true
+    toc-location: left
 ---
 
 ```{r}
@@ -19,7 +22,7 @@ knitr::opts_chunk$set(
 
 # Before starting teaching
 - Wait until the other instructor stops teaching ( check with them)
-- Go to the repository folder: `/path/to/my/repo/folder` 
+- Go to the repository folder: ` cd /path/to/my/repo/folder` 
 - Pull the changes (`git pull`)
 - Add [SSH agent](https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase):  `eval $(ssh-agent)`,  followed by `ssh-add` in your terminal
 - In terminal, start observing the folder : `gitautopush`
@@ -28,7 +31,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-- Introduce myself (slide?)
+- Introduce myself
 - Remind of github repository 
    - I will create a new script `data-wrangling.R` in `scripts` folder!
    -refresh to see the code
@@ -38,8 +41,11 @@ knitr::opts_chunk$set(
 
 
 # Data Wrangling with dplyr 10:45 - 11:45
+<div class="alert alert-info">
+SLIDE
+</div>
 
-- `dplyr` - package with many useful functions used for data wrangling / data manipulation. (slide)
+- `dplyr` - package with many useful functions used for data wrangling / data manipulation.
 
 - `dplyr` comes with the `tidyverse` suite , so if you have `tidyverse` package installed and loaded, you already have `dplyr` available for you. 
 - I am now starting my work with R, so I will need to load the `tidyverse` and `here` libraries.
@@ -93,12 +99,12 @@ filter(interviews, village == "Chirodzo")
 ```
 
 #### Multiple conditions
-You can also use `filter` function if you want to apply multiple conditions (e.g. only interested from a certain location in a certain time period).
+You can also use `filter` function for multiple conditions 
 
-There are two ways two apply multiple conditions to a dataset:  using either `AND` or `OR` statement.
+There are two ways two apply multiple conditions:
 
-- `AND` statement means that **all** of the criteria needs to be fulfiled
-- `OR` statement means that **at least one** of the criteria needs to be fulfiled.
+- `AND` statement - **all** of the criteria needs to be fulfilled
+- `OR` statement - **at least one** of the criteria needs to be fulfilled.
 
 You have heard  already about the `&` and `|` logical operators. We will use them to filter by multiple conditions.
 
@@ -159,19 +165,19 @@ interviews_ch <- interviews %>%
 - Has a clean, easy to read syntax
 </div>
 
-Pipes passes the object on the `LHS` to `RHS`. Therefore, it is not needed to mention the dataset within the call of `select()` or `filter` functions. 
+Pipes passes the object on the `LHS` to `RHS`. Therefore, it is not needed to mention the dataset within the call of `select()` or `filter()` functions. 
 
 As the order of the operations using pipe is from left to right, it is useful to read the pipe as **AND THEN**. 
 
 
 :::{.callout-tip}
-## There are different pipes!
+## New pipe!
 
 - The original pipe used in the `tidyverse` style is `%>%` . It comes from the `magrittr` package loaded automatically with `dplyr`.
 
 - Recently, a new pipe `>|` has been added to the `base` R. It means that you don't need to load any additional packages to use it - it comes with R installation. 
 
-Although its behaviour varies in details, they work in a very similar way. I will be using old pipe ( `%>%`), but note that  the `|>` notation has becoming more and more popular. 
+Although its behaviour varies in details, they work in a very similar way. I will be using old pipe (`%>%`), but note that  the `|>` notation has becoming more and more popular. 
 
 :::
 
@@ -183,22 +189,27 @@ In RStudio you can use keyboard shortcut <kbd>`Ctrl`</kbd> + <kbd>`Shift`</kbd> 
 :::
 
 ## Exercise - Pipes
-(slide)
+<div class="alert alert-info">
+SLIDE
+</div>
 
-Using pipes, subset the `interviews` data to include interviews where respondents were members of an irrigation association (`memb_assoc`) and retain only the columns `affect_conflicts`, `liv_count`, and `no_meals`.
+<!-- Using pipes, subset the `interviews` data to include interviews where respondents were members of an irrigation association (`memb_assoc`) and retain only the columns `affect_conflicts`, `liv_count`, and `no_meals`. -->
 
-### Solution
-```{r}
-interviews %>%
-    filter(memb_assoc == "yes") %>%
-    select(affect_conflicts, liv_count, no_meals)
-```
+<!-- ### Solution -->
+<!-- ```{r} -->
+<!-- interviews %>% -->
+<!--     filter(memb_assoc == "yes") %>% -->
+<!--     select(affect_conflicts, liv_count, no_meals) -->
+<!-- ``` -->
 
-**Bonus question** What if you reverse the order of operations? 
+<!-- **Bonus question** What if you reverse the order of operations?  -->
 
 
 ## Mutate
-Frequently you’ll want to create new columns based on the values in existing columns, for example to do unit conversions, or to find the ratio of values in two columns. For this we’ll use `mutate()`.  
+
+- to create new columns based on the values in existing columns
+- e.g.  to calculate the ratio of values in two columns. 
+- For this we’ll use `mutate()`.  
 
 We'll calculate an average number of household members per room: 
 ```{r}
@@ -208,13 +219,15 @@ interviews %>%
 
 ```
 
-We can chain the mutate operation with other `dplyr` functions, using pipe. 
+- We can chain the mutate operation with other `dplyr` functions, using pipe. 
 
 Let's say, in our analysis we're interested in being a member of an irrigation association (`memb_assoc`). 
 For this we are only interested in the cases that have information about this variable.
 
 ```{r}
 # filter out cases with missing values and calculate average
+#| code-line-numbers: "5"
+
 interviews %>%
     filter(!is.na(memb_assoc)) %>%
     mutate(people_per_room = no_membrs / rooms)
@@ -226,18 +239,20 @@ interviews %>%
 - The filtering keeps only "non missing cases of `memb_assoc`
 
 ## Exercise - Mutate
-(slide)
+<div class="alert alert-info">
+SLIDE
+</div>
 
-Create a new dataframe from the `interviews` data that meets the following criteria: contains only the `village` column and a new column called `total_meals` containing a value that is equal to the total number of meals served in the household per day on average (`no_membrs` times `no_meals`). Only the rows where `total_meals` is greater than 20 should be shown in the final dataframe.
+<!-- Create a new dataframe from the `interviews` data that meets the following criteria: contains only the `village` column and a new column called `total_meals` containing a value that is equal to the total number of meals served in the household per day on average (`no_membrs` times `no_meals`). Only the rows where `total_meals` is greater than 20 should be shown in the final dataframe. -->
 
-### Solution 
+<!-- ### Solution  -->
 
-```{r}
-interviews_total_meals <- interviews %>%
-    mutate(total_meals = no_membrs * no_meals) %>%
-    filter(total_meals > 20) %>%
-    select(village, total_meals)
-```
+<!-- ```{r} -->
+<!-- interviews_total_meals <- interviews %>% -->
+<!--     mutate(total_meals = no_membrs * no_meals) %>% -->
+<!--     filter(total_meals > 20) %>% -->
+<!--     select(village, total_meals) -->
+<!-- ``` -->
 
 ## Split-apply-combine
 When conducting analysis, instead of filtering only one group of interest ( e.g. only one village), we often like to see how results differ per group. To do that you can use the *split-apply-combine* approach: 
@@ -262,7 +277,7 @@ interviews %>%
 You can also group by multiple columns
 ;
 
-```{r}
+```{r }
 # average household size by village and assoc membership
 interviews %>%
     group_by(village, memb_assoc) %>%
@@ -273,6 +288,8 @@ interviews %>%
  We can see that there are some missing values in the `memb_assoc`. We can remove them with the filtering step that we used before: 
  
 ```{r}
+#| code-line-numbers: "3"
+
 # summarise
 interviews %>%
     filter(!is.na(memb_assoc)) %>%
@@ -284,6 +301,8 @@ interviews %>%
 We can also make multiple calculations at the same time:
  
 ```{r}
+#| code-line-numbers: "6"
+
 # multiple calculations
 interviews %>%
     filter(!is.na(memb_assoc)) %>%
@@ -294,6 +313,8 @@ interviews %>%
 
 You might to sort your results by the calculation you've just made: 
 ```{r}
+#| code-line-numbers: "7"
+
 # sort by result of calculation
 interviews %>%
     filter(!is.na(memb_assoc)) %>%
@@ -320,41 +341,144 @@ interviews %>%
 ```
 
 ## Exercise - Count + summarize
-(slide)
+<div class="alert alert-info">
+SLIDE
+</div>
 
-1) How many households in the survey have an average of **two meals per day**? **Three meals per day**? Are there any other numbers of meals represented?
+<!-- 1) How many households in the survey have an average of **two meals per day**? **Three meals per day**? Are there any other numbers of meals represented? -->
 
-2) Use `group_by()` and `summarize()` to find the mean, min, and max number of household members for each village. Also add the number of observations (hint: see `?n`).
-
-
+<!-- 2) Use `group_by()` and `summarize()` to find the mean, min, and max number of household members for each village. Also add the number of observations (hint: see `?n`). -->
 
 
 # Coffee break! 11:45 - 12:00
-(slide)
+<div class="alert alert-info">
+SLIDE
+</div>
 
 # Data wrangling with  tidyr 12:00 - 12:50
 
 ## Solutions Count + summarize exercises
 
 ### Solution
-```{r}
-interviews %>%
-   count(no_meals)
-```
+<div class="alert alert-info">
+SLIDE
+</div>
+
+
+## Reshaping with pivot_wider() and pivot_longer()
+
+### wide and long 
+<div class="alert alert-info">
+SLIDE
+</div>
+
+Tabular data can be written in two formats: **long** and **wide**.
+
+- In the **wide** format, all information about a subject is represented in a single row (`ID` don't repeat)
+
+- In the **long** format, each measurement is represented is one row. So subject might have data in multiple rows (`ID` can be repeated).
+
+You might want to transform data from wide to long format and vice versa, depending on what's more handy for data analysis, visualization and presentation. Wide data are generally easier to udnerstand by humans, but long data format is more machine readable. So these transformations might be very useful.
+
+### pivot_wider()
+<div class="alert alert-info">
+SLIDE
+</div>
+
+`pivot_wider()` takes three principal arguments:
+
+- the data
+- the `names_from` column variable whose values will become new column names.
+- the `values_from` column variable whose values will fill the new column variables.
+- Further arguments include `values_fill` which, if set, fills in missing values with the value provided.
+
 
 ```{r}
-interviews %>%
-  group_by(village) %>%
-  summarize(
-      mean_no_membrs = mean(no_membrs),
-      min_no_membrs = min(no_membrs),
-      max_no_membrs = max(no_membrs),
-      n = n()
-  )
+# convert to wide(-er) format
+interviews_wide <- interviews %>%
+    mutate(wall_type_logical = TRUE) %>%
+    pivot_wider(names_from = respondent_wall_type,
+                values_from = wall_type_logical,
+                values_fill = list(wall_type_logical = FALSE))
+
 ```
-## Reshaping with pivot_wider() and pivot_longer()
+
+### pivot_longer()
+<div class="alert alert-info">
+SLIDE
+</div>
+
+`pivot_longer()` takes four principal arguments:
+
+- the data
+- `cols` are the names of the columns we use to fill the a new values variable (or to drop).
+- the `names_to` column variable we wish to create from the cols provided.
+- the `values_to` column variable we wish to create and fill with values associated with the cols provided.
+
+
+```{r}
+# convert to long(-er) format
+
+interviews_long <- interviews_wide %>%
+  pivot_longer(cols = c(muddaub, cement, sunbricks, burntbricks),
+               names_to = "respondent_wall_type",
+               values_to = "wall_type_logical") %>%
+  filter(wall_type_logical == TRUE)
+
+```
+     
+- This creates a dataframe with **524 rows** 
+-(4 rows per interview respondent
+- each row corresponding to each type of wall. 
+- However, each respondent has only one wall type. 
+- Thus, we're interested only in the observations where `wall_type_logical` is `TRUE`. 
+- We also don't need this variable anymore as it doesn't provide any information (it's always `TRUE`)
+
+
+```{r}
+#| code-line-numbers: "5-6"
+
+interviews_long <- interviews_wide %>%
+    pivot_longer(cols = c(burntbricks, cement, muddaub, sunbricks),
+                 names_to = "respondent_wall_type",
+                 values_to = "wall_type_logical") %>%
+    filter(wall_type_logical) %>%
+    select(-wall_type_logical)
+```
 
 
 ## Cleaning + exporting SAFI data
+
+#### Exporting data ####
+```{r}
+#| eval: false 
+
+interviews_plotting <- interviews %>%
+  ## pivot wider by items_owned
+  separate_rows(items_owned, sep = ";") %>%
+  ## if there were no items listed, changing NA to no_listed_items
+  replace_na(list(items_owned = "no_listed_items")) %>%
+  mutate(items_owned_logical = TRUE) %>%
+  pivot_wider(names_from = items_owned,
+              values_from = items_owned_logical,
+              values_fill = list(items_owned_logical = FALSE)) %>%
+  ## pivot wider by months_lack_food
+  separate_rows(months_lack_food, sep = ";") %>%
+  mutate(months_lack_food_logical = TRUE) %>%
+  pivot_wider(names_from = months_lack_food,
+              values_from = months_lack_food_logical,
+              values_fill = list(months_lack_food_logical = FALSE)) %>%
+  ## add some summary columns
+  mutate(number_months_lack_food = rowSums(select(., Jan:May))) %>%
+  mutate(number_items = rowSums(select(., bicycle:car)))
+
+## save the dataframe to our data_output directory
+write_csv(interviews_plotting, file = here("data_output/interviews_plotting.csv"))
+
+```
+
+
+
+
 
 

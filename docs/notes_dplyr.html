@@ -101,10 +101,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#before-starting-teaching" id="toc-before-starting-teaching" class="nav-link active" data-scroll-target="#before-starting-teaching">Before starting teaching</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data-wrangling-with-dplyr-1045---1145" id="toc-data-wrangling-with-dplyr-1045---1145" class="nav-link" data-scroll-target="#data-wrangling-with-dplyr-1045---1145">Data Wrangling with dplyr 10:45 - 11:45</a>
+  <ul class="collapse">
+  <li><a href="#load-packages-and-save-the-dataset" id="toc-load-packages-and-save-the-dataset" class="nav-link" data-scroll-target="#load-packages-and-save-the-dataset">Load packages and save the dataset</a></li>
+  <li><a href="#selecting-columns-and-filtering-rows" id="toc-selecting-columns-and-filtering-rows" class="nav-link" data-scroll-target="#selecting-columns-and-filtering-rows">Selecting columns and filtering rows</a>
+  <ul class="collapse">
+  <li><a href="#subsetting-by-columns" id="toc-subsetting-by-columns" class="nav-link" data-scroll-target="#subsetting-by-columns">Subsetting by columns</a></li>
+  <li><a href="#subsetting-by-rows" id="toc-subsetting-by-rows" class="nav-link" data-scroll-target="#subsetting-by-rows">Subsetting by rows</a></li>
+  </ul></li>
+  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes">Pipes</a></li>
+  <li><a href="#exercise---pipes" id="toc-exercise---pipes" class="nav-link" data-scroll-target="#exercise---pipes">Exercise - Pipes</a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">Mutate</a></li>
+  <li><a href="#exercise---mutate" id="toc-exercise---mutate" class="nav-link" data-scroll-target="#exercise---mutate">Exercise - Mutate</a></li>
+  <li><a href="#split-apply-combine" id="toc-split-apply-combine" class="nav-link" data-scroll-target="#split-apply-combine">Split-apply-combine</a>
+  <ul class="collapse">
+  <li><a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise">Summarise</a></li>
+  <li><a href="#counting" id="toc-counting" class="nav-link" data-scroll-target="#counting">Counting</a></li>
+  </ul></li>
+  <li><a href="#exercise---count-summarize" id="toc-exercise---count-summarize" class="nav-link" data-scroll-target="#exercise---count-summarize">Exercise - Count + summarize</a></li>
+  </ul></li>
+  <li><a href="#coffee-break-1145---1200" id="toc-coffee-break-1145---1200" class="nav-link" data-scroll-target="#coffee-break-1145---1200">Coffee break! 11:45 - 12:00</a></li>
+  <li><a href="#data-wrangling-with-tidyr-1200---1250" id="toc-data-wrangling-with-tidyr-1200---1250" class="nav-link" data-scroll-target="#data-wrangling-with-tidyr-1200---1250">Data wrangling with tidyr 12:00 - 12:50</a>
+  <ul class="collapse">
+  <li><a href="#solutions-count-summarize-exercises" id="toc-solutions-count-summarize-exercises" class="nav-link" data-scroll-target="#solutions-count-summarize-exercises">Solutions Count + summarize exercises</a>
+  <ul class="collapse">
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
+  </ul></li>
+  <li><a href="#reshaping-with-pivot_wider-and-pivot_longer" id="toc-reshaping-with-pivot_wider-and-pivot_longer" class="nav-link" data-scroll-target="#reshaping-with-pivot_wider-and-pivot_longer">Reshaping with pivot_wider() and pivot_longer()</a>
+  <ul class="collapse">
+  <li><a href="#wide-and-long" id="toc-wide-and-long" class="nav-link" data-scroll-target="#wide-and-long">wide and long</a></li>
+  <li><a href="#pivot_wider" id="toc-pivot_wider" class="nav-link" data-scroll-target="#pivot_wider">pivot_wider()</a></li>
+  <li><a href="#pivot_longer" id="toc-pivot_longer" class="nav-link" data-scroll-target="#pivot_longer">pivot_longer()</a></li>
+  </ul></li>
+  <li><a href="#cleaning-exporting-safi-data" id="toc-cleaning-exporting-safi-data" class="nav-link" data-scroll-target="#cleaning-exporting-safi-data">Cleaning + exporting SAFI data</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -134,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Before starting teaching</h1>
 <ul>
 <li>Wait until the other instructor stops teaching ( check with them)</li>
-<li>Go to the repository folder: <code>/path/to/my/repo/folder</code></li>
+<li>Go to the repository folder: <code>cd /path/to/my/repo/folder</code></li>
 <li>Pull the changes (<code>git pull</code>)</li>
 <li>Add <a href="https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase">SSH agent</a>: <code>eval $(ssh-agent)</code>, followed by <code>ssh-add</code> in your terminal</li>
 <li>In terminal, start observing the folder : <code>gitautopush</code></li>
@@ -145,7 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <ul>
-<li>Introduce myself (slide?)</li>
+<li>Introduce myself</li>
 <li>Remind of github repository
 <ul>
 <li>I will create a new script <code>data-wrangling.R</code> in <code>scripts</code> folder! -refresh to see the code</li>
@@ -159,8 +204,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="data-wrangling-with-dplyr-1045---1145" class="level1">
 <h1>Data Wrangling with dplyr 10:45 - 11:45</h1>
+<div class="alert alert-info">
+<p>SLIDE</p>
+</div>
 <ul>
-<li><p><code>dplyr</code> - package with many useful functions used for data wrangling / data manipulation. (slide)</p></li>
+<li><p><code>dplyr</code> - package with many useful functions used for data wrangling / data manipulation.</p></li>
 <li><p><code>dplyr</code> comes with the <code>tidyverse</code> suite , so if you have <code>tidyverse</code> package installed and loaded, you already have <code>dplyr</code> available for you.</p></li>
 <li><p>I am now starting my work with R, so I will need to load the <code>tidyverse</code> and <code>here</code> libraries.</p></li>
 </ul>
@@ -208,11 +256,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="multiple-conditions" class="level4">
 <h4 class="anchored" data-anchor-id="multiple-conditions">Multiple conditions</h4>
-<p>You can also use <code>filter</code> function if you want to apply multiple conditions (e.g.&nbsp;only interested from a certain location in a certain time period).</p>
-<p>There are two ways two apply multiple conditions to a dataset: using either <code>AND</code> or <code>OR</code> statement.</p>
+<p>You can also use <code>filter</code> function for multiple conditions</p>
+<p>There are two ways two apply multiple conditions:</p>
 <ul>
-<li><code>AND</code> statement means that <strong>all</strong> of the criteria needs to be fulfiled</li>
-<li><code>OR</code> statement means that <strong>at least one</strong> of the criteria needs to be fulfiled.</li>
+<li><code>AND</code> statement - <strong>all</strong> of the criteria needs to be fulfilled</li>
+<li><code>OR</code> statement - <strong>at least one</strong> of the criteria needs to be fulfilled.</li>
 </ul>
 <p>You have heard already about the <code>&amp;</code> and <code>|</code> logical operators. We will use them to filter by multiple conditions.</p>
 <div class="cell">
@@ -278,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Has a clean, easy to read syntax</li>
 </ul>
 </div>
-<p>Pipes passes the object on the <code>LHS</code> to <code>RHS</code>. Therefore, it is not needed to mention the dataset within the call of <code>select()</code> or <code>filter</code> functions.</p>
+<p>Pipes passes the object on the <code>LHS</code> to <code>RHS</code>. Therefore, it is not needed to mention the dataset within the call of <code>select()</code> or <code>filter()</code> functions.</p>
 <p>As the order of the operations using pipe is from left to right, it is useful to read the pipe as <strong>AND THEN</strong>.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -286,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-There are different pipes!
+New pipe!
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -294,7 +342,7 @@ There are different pipes!
 <li><p>The original pipe used in the <code>tidyverse</code> style is <code>%&gt;%</code> . It comes from the <code>magrittr</code> package loaded automatically with <code>dplyr</code>.</p></li>
 <li><p>Recently, a new pipe <code>&gt;|</code> has been added to the <code>base</code> R. It means that you don’t need to load any additional packages to use it - it comes with R installation.</p></li>
 </ul>
-<p>Although its behaviour varies in details, they work in a very similar way. I will be using old pipe ( <code>%&gt;%</code>), but note that the <code>|&gt;</code> notation has becoming more and more popular.</p>
+<p>Although its behaviour varies in details, they work in a very similar way. I will be using old pipe (<code>%&gt;%</code>), but note that the <code>|&gt;</code> notation has becoming more and more popular.</p>
 </div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
@@ -313,34 +361,42 @@ Keyboard shortcut
 </section>
 <section id="exercise---pipes" class="level2">
 <h2 class="anchored" data-anchor-id="exercise---pipes">Exercise - Pipes</h2>
-<p>(slide)</p>
-<p>Using pipes, subset the <code>interviews</code> data to include interviews where respondents were members of an irrigation association (<code>memb_assoc</code>) and retain only the columns <code>affect_conflicts</code>, <code>liv_count</code>, and <code>no_meals</code>.</p>
-<section id="solution" class="level3">
-<h3 class="anchored" data-anchor-id="solution">Solution</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(memb_assoc <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(affect_conflicts, liv_count, no_meals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="alert alert-info">
+<p>SLIDE</p>
 </div>
-<p><strong>Bonus question</strong> What if you reverse the order of operations?</p>
-</section>
+<!-- Using pipes, subset the `interviews` data to include interviews where respondents were members of an irrigation association (`memb_assoc`) and retain only the columns `affect_conflicts`, `liv_count`, and `no_meals`. -->
+<!-- ### Solution -->
+<!-- ```{r} -->
+<!-- interviews %>% -->
+<!--     filter(memb_assoc == "yes") %>% -->
+<!--     select(affect_conflicts, liv_count, no_meals) -->
+<!-- ``` -->
+<!-- **Bonus question** What if you reverse the order of operations?  -->
 </section>
 <section id="mutate" class="level2">
 <h2 class="anchored" data-anchor-id="mutate">Mutate</h2>
-<p>Frequently you’ll want to create new columns based on the values in existing columns, for example to do unit conversions, or to find the ratio of values in two columns. For this we’ll use <code>mutate()</code>.</p>
+<ul>
+<li>to create new columns based on the values in existing columns</li>
+<li>e.g.&nbsp;to calculate the ratio of values in two columns.</li>
+<li>For this we’ll use <code>mutate()</code>.</li>
+</ul>
 <p>We’ll calculate an average number of household members per room:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average number of household members per room</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average number of household members per room</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can chain the mutate operation with other <code>dplyr</code> functions, using pipe.</p>
+<ul>
+<li>We can chain the mutate operation with other <code>dplyr</code> functions, using pipe.</li>
+</ul>
 <p>Let’s say, in our analysis we’re interested in being a member of an irrigation association (<code>memb_assoc</code>). For this we are only interested in the cases that have information about this variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out cases with missing values and calculate average</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out cases with missing values and calculate average</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-line-numbers: "5"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Function <code>is.na()</code> returns logical values <code>TRUE</code> if value is missing ( <code>NA</code>) and <code>FALSE</code> otherwise.</li>
@@ -351,17 +407,17 @@ Keyboard shortcut
 </section>
 <section id="exercise---mutate" class="level2">
 <h2 class="anchored" data-anchor-id="exercise---mutate">Exercise - Mutate</h2>
-<p>(slide)</p>
-<p>Create a new dataframe from the <code>interviews</code> data that meets the following criteria: contains only the <code>village</code> column and a new column called <code>total_meals</code> containing a value that is equal to the total number of meals served in the household per day on average (<code>no_membrs</code> times <code>no_meals</code>). Only the rows where <code>total_meals</code> is greater than 20 should be shown in the final dataframe.</p>
-<section id="solution-1" class="level3">
-<h3 class="anchored" data-anchor-id="solution-1">Solution</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>interviews_total_meals <span class="ot">&lt;-</span> interviews <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_meals =</span> no_membrs <span class="sc">*</span> no_meals) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(total_meals <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(village, total_meals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="alert alert-info">
+<p>SLIDE</p>
 </div>
-</section>
+<!-- Create a new dataframe from the `interviews` data that meets the following criteria: contains only the `village` column and a new column called `total_meals` containing a value that is equal to the total number of meals served in the household per day on average (`no_membrs` times `no_meals`). Only the rows where `total_meals` is greater than 20 should be shown in the final dataframe. -->
+<!-- ### Solution  -->
+<!-- ```{r} -->
+<!-- interviews_total_meals <- interviews %>% -->
+<!--     mutate(total_meals = no_membrs * no_meals) %>% -->
+<!--     filter(total_meals > 20) %>% -->
+<!--     select(village, total_meals) -->
+<!-- ``` -->
 </section>
 <section id="split-apply-combine" class="level2">
 <h2 class="anchored" data-anchor-id="split-apply-combine">Split-apply-combine</h2>
@@ -375,101 +431,189 @@ Keyboard shortcut
 <h3 class="anchored" data-anchor-id="summarise">Summarise</h3>
 <p>Let’s say we want to calculate the average household size by village:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average household size by village</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(village) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average household size by village</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(village) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can also group by multiple columns ;</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average household size by village and assoc membership</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># average household size by village and assoc membership</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can see that there are some missing values in the <code>memb_assoc</code>. We can remove them with the filtering step that we used before:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># summarise</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also make multiple calculations at the same time:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multiple calculations</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_membrs =</span> <span class="fu">min</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># multiple calculations</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
+<span id="cb14-6"><a href="#cb14-6"></a>              <span class="at">min_membrs =</span> <span class="fu">min</span>(no_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You might to sort your results by the calculation you’ve just made:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort by result of calculation</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">min_membrs =</span> <span class="fu">min</span>(no_membrs))  <span class="sc">%&gt;%</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(min_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># sort by result of calculation</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(memb_assoc)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="fu">group_by</span>(village, memb_assoc) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="fu">summarize</span>(<span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
+<span id="cb15-6"><a href="#cb15-6"></a>              <span class="at">min_membrs =</span> <span class="fu">min</span>(no_membrs))  <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(min_membrs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="counting" class="level3">
 <h3 class="anchored" data-anchor-id="counting">Counting</h3>
 <p>To find number of observations per group</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of observations per village</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(village)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of observations per village</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(village)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can sort by the result</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># same, sorted</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(village, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># same, sorted</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(village, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="exercise---count-summarize" class="level2">
 <h2 class="anchored" data-anchor-id="exercise---count-summarize">Exercise - Count + summarize</h2>
-<p>(slide) 1) How many households in the survey have an average of <strong>two meals per day</strong>? <strong>Three meals per day</strong>? Are there any other numbers of meals represented?</p>
-<ol start="2" type="1">
-<li>Use <code>group_by()</code> and <code>summarize()</code> to find the mean, min, and max number of household members for each village. Also add the number of observations (hint: see <code>?n</code>).</li>
-</ol>
+<div class="alert alert-info">
+<p>SLIDE</p>
+</div>
+<!-- 1) How many households in the survey have an average of **two meals per day**? **Three meals per day**? Are there any other numbers of meals represented? -->
+<!-- 2) Use `group_by()` and `summarize()` to find the mean, min, and max number of household members for each village. Also add the number of observations (hint: see `?n`). -->
 </section>
 </section>
 <section id="coffee-break-1145---1200" class="level1">
 <h1>Coffee break! 11:45 - 12:00</h1>
-<p>(slide)</p>
+<div class="alert alert-info">
+<p>SLIDE</p>
+</div>
 </section>
 <section id="data-wrangling-with-tidyr-1200---1250" class="level1">
 <h1>Data wrangling with tidyr 12:00 - 12:50</h1>
 <section id="solutions-count-summarize-exercises" class="level2">
 <h2 class="anchored" data-anchor-id="solutions-count-summarize-exercises">Solutions Count + summarize exercises</h2>
-<section id="solution-2" class="level3">
-<h3 class="anchored" data-anchor-id="solution-2">Solution</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">count</span>(no_meals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>interviews <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(village) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_no_membrs =</span> <span class="fu">mean</span>(no_membrs),</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">min_no_membrs =</span> <span class="fu">min</span>(no_membrs),</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">max_no_membrs =</span> <span class="fu">max</span>(no_membrs),</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="solution" class="level3">
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
+<div class="alert alert-info">
+<p>SLIDE</p>
 </div>
 </section>
 </section>
 <section id="reshaping-with-pivot_wider-and-pivot_longer" class="level2">
 <h2 class="anchored" data-anchor-id="reshaping-with-pivot_wider-and-pivot_longer">Reshaping with pivot_wider() and pivot_longer()</h2>
+<section id="wide-and-long" class="level3">
+<h3 class="anchored" data-anchor-id="wide-and-long">wide and long</h3>
+<div class="alert alert-info">
+<p>SLIDE</p>
+</div>
+<p>Tabular data can be written in two formats: <strong>long</strong> and <strong>wide</strong>.</p>
+<ul>
+<li><p>In the <strong>wide</strong> format, all information about a subject is represented in a single row (<code>ID</code> don’t repeat)</p></li>
+<li><p>In the <strong>long</strong> format, each measurement is represented is one row. So subject might have data in multiple rows (<code>ID</code> can be repeated).</p></li>
+</ul>
+<p>You might want to transform data from wide to long format and vice versa, depending on what’s more handy for data analysis, visualization and presentation. Wide data are generally easier to udnerstand by humans, but long data format is more machine readable. So these transformations might be very useful.</p>
+</section>
+<section id="pivot_wider" class="level3">
+<h3 class="anchored" data-anchor-id="pivot_wider">pivot_wider()</h3>
+<div class="alert alert-info">
+<p>SLIDE</p>
+</div>
+<p><code>pivot_wider()</code> takes three principal arguments:</p>
+<ul>
+<li>the data</li>
+<li>the <code>names_from</code> column variable whose values will become new column names.</li>
+<li>the <code>values_from</code> column variable whose values will fill the new column variables.</li>
+<li>Further arguments include <code>values_fill</code> which, if set, fills in missing values with the value provided.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to wide(-er) format</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>interviews_wide <span class="ot">&lt;-</span> interviews <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">wall_type_logical =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> respondent_wall_type,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">values_from =</span> wall_type_logical,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">values_fill =</span> <span class="fu">list</span>(<span class="at">wall_type_logical =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pivot_longer" class="level3">
+<h3 class="anchored" data-anchor-id="pivot_longer">pivot_longer()</h3>
+<div class="alert alert-info">
+<p>SLIDE</p>
+</div>
+<p><code>pivot_longer()</code> takes four principal arguments:</p>
+<ul>
+<li>the data</li>
+<li><code>cols</code> are the names of the columns we use to fill the a new values variable (or to drop).</li>
+<li>the <code>names_to</code> column variable we wish to create from the cols provided.</li>
+<li>the <code>values_to</code> column variable we wish to create and fill with values associated with the cols provided.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to long(-er) format</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>interviews_long <span class="ot">&lt;-</span> interviews_wide <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(muddaub, cement, sunbricks, burntbricks),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"respondent_wall_type"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"wall_type_logical"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wall_type_logical <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>This creates a dataframe with <strong>524 rows</strong> -(4 rows per interview respondent</li>
+<li>each row corresponding to each type of wall.</li>
+<li>However, each respondent has only one wall type.</li>
+<li>Thus, we’re interested only in the observations where <code>wall_type_logical</code> is <code>TRUE</code>.</li>
+<li>We also don’t need this variable anymore as it doesn’t provide any information (it’s always <code>TRUE</code>)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>interviews_long <span class="ot">&lt;-</span> interviews_wide <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(burntbricks, cement, muddaub, sunbricks),</span>
+<span id="cb20-3"><a href="#cb20-3"></a>                 <span class="at">names_to =</span> <span class="st">"respondent_wall_type"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>                 <span class="at">values_to =</span> <span class="st">"wall_type_logical"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>    <span class="fu">filter</span>(wall_type_logical) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="fu">select</span>(<span class="sc">-</span>wall_type_logical)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="cleaning-exporting-safi-data" class="level2">
 <h2 class="anchored" data-anchor-id="cleaning-exporting-safi-data">Cleaning + exporting SAFI data</h2>
+<section id="exporting-data" class="level4">
+<h4 class="anchored" data-anchor-id="exporting-data">Exporting data</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>interviews_plotting <span class="ot">&lt;-</span> interviews <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="do">## pivot wider by items_owned</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(items_owned, <span class="at">sep =</span> <span class="st">";"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## if there were no items listed, changing NA to no_listed_items</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">items_owned =</span> <span class="st">"no_listed_items"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">items_owned_logical =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> items_owned,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> items_owned_logical,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="fu">list</span>(<span class="at">items_owned_logical =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">## pivot wider by months_lack_food</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(months_lack_food, <span class="at">sep =</span> <span class="st">";"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">months_lack_food_logical =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> months_lack_food,</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> months_lack_food_logical,</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="fu">list</span>(<span class="at">months_lack_food_logical =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="do">## add some summary columns</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">number_months_lack_food =</span> <span class="fu">rowSums</span>(<span class="fu">select</span>(., Jan<span class="sc">:</span>May))) <span class="sc">%&gt;%</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">number_items =</span> <span class="fu">rowSums</span>(<span class="fu">select</span>(., bicycle<span class="sc">:</span>car)))</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="do">## save the dataframe to our data_output directory</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(interviews_plotting, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"data_output/interviews_plotting.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 </section>
 

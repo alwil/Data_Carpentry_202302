@@ -1,11 +1,15 @@
 ---
-title: "Data Wrangling with `dplyr`"
+title: "Data wrangling with `dplyr`and `tidyr`"
+subtitle: "Data Carpentry for Social Sciences & Humanities"
 author: "Aleksandra Wilczynska"
+date: 2023-02-23
 format: 
   revealjs:
-    footer: "Data Carpentry for Social Sciences & Humanities"
+    fig-cap-location: margin  
+    footer: "Data wrangling with `dplyr` and `tidyr`"
     chalkboard: true
-    incremental: true   
+    incremental: false 
+    mouse-wheel: true 
     theme: [default, custom.scss]
 ---
 
@@ -27,17 +31,24 @@ knitr::opts_chunk$set(
   )
 ```
 
-## Intro
-
 ## What is data manipulation?
+
+> **Data wrangling** is the process of reshaping data from its raw format, into a format that is suitable for analysis.
+
+![](img/data-science.png)
+
+<!-- :::{.aside} -->
+
+<!-- [R for Data Science, Wickham H and Grolemund G](https://r4ds.had.co.nz/index.html) © Wickham, Grolemund 2017 -->
+
+<!-- ::: -->
 
 ## Exercise 1: `r emo::ji("clock")` **3 mins**
 
-::: {.nonincremental}
 - subset the `interviews` data to include interviews where respondents were members of an irrigation association (`memb_assoc`); 
 - retain only the columns `affect_conflicts`, `liv_count`, and `no_meals`;
 - use pipes!
-:::
+
 
 ```{r}
 #| echo: false
@@ -50,8 +61,8 @@ countdown::countdown(minutes = 3)
 ```{r}
 #| eval: false
 interviews %>%
-    filter(memb_assoc == "yes") %>%
-    select(affect_conflicts, liv_count, no_meals)
+  filter(memb_assoc == "yes") %>%
+  select(affect_conflicts, liv_count, no_meals)
 ```
 
 . . . 
@@ -64,7 +75,10 @@ Can you reverse the order of operations? Why?
 
 ## Exercise 2: `r emo::ji("clock")` **5 mins**
 
-Create a new dataframe from the `interviews` data that meets the following criteria:contains only the `village` column and a new column called `total_meals`,containing a value that is equal to the total number of meals served in the household per day on average (`no_membrs` times `no_meals`). Only the rows where `total_meals` is greater than 20 should be shown in the final dataframe.
+Create a new dataframe from the `interviews` data that:
+
+- contains only the `village` column and a new column called `total_meals`, standing for total number of meals served in the household per day on average (`no_membrs` times `no_meals`). 
+- Only the rows where `total_meals` is greater than 20 should be shown in the final dataframe.
 
 
 ```{r}
@@ -79,24 +93,23 @@ countdown::countdown(minutes = 5)
 #| eval: false
 
 interviews %>%
-    mutate(total_meals = no_membrs * no_meals) %>%
-    filter(total_meals > 20) %>%
-    select(village, total_meals)
+  mutate(total_meals = no_membrs * no_meals) %>%
+  filter(total_meals > 20) %>%
+  select(village, total_meals)
 ```
 
-## Exercise 2: `r emo::ji("clock")` **7 mins**
+## Exercise 3: `r emo::ji("clock")` **7 mins**
 
-:::{.nonincremental}
-1) How many households in the survey have an average of **two meals per day**? **Three meals per day**? Are there any other numbers of meals represented?
+1) How many households in the survey have an average of two meals per day? Three meals per day? Are there any other numbers of meals represented?
 
-2) Use `group_by()` and `summarize()` to **find the mean, min, and max number of household members for each village**. Also add the number of observations (hint: see `?n`).
+2) Use `group_by()` and `summarize()` to find the mean, min, and max number of household members for each village. Also add the number of observations (hint: see `?n`).
 
 ```{r}
 #| echo: false
 #| cache: false
 countdown::countdown(minutes = 7)
 ```
-:::
+
 
 
 ## Coffee break
@@ -106,17 +119,17 @@ countdown::countdown(minutes = 7)
 
 ## Solution
 
-How many households in the survey have an average of **two meals per day**? 
+1) How many households in the survey have an average of two meals per day? 
 
 ```{r}
 #| eval: false
 
 interviews %>%
-   count(no_meals)
+  count(no_meals)
 ```
 
 
-**Find the mean, min, and max number of household members for each village**. Add the number of observations.
+2) Find the mean, min, and max number of household members for each village. Add the number of observations.
 
 ```{r}
 #| eval: false
@@ -124,13 +137,68 @@ interviews %>%
 interviews %>%
   group_by(village) %>%
   summarize(
-      mean_no_membrs = mean(no_membrs),
-      min_no_membrs = min(no_membrs),
-      max_no_membrs = max(no_membrs),
-      n = n()
+    mean_no_membrs = mean(no_membrs),
+    min_no_membrs = min(no_membrs),
+    max_no_membrs = max(no_membrs),
+    n = n()
   )
 ``` 
 
-## Exporting SAFI data
+<!-- ## Tidy dataset -->
 
+
+<!-- 1. Each **variable** has its own **column** -->
+<!-- 2. Each **observation** has its own **row** -->
+<!-- 3. Each **value** must have its own **cell** -->
+
+<!-- ![](img/tidy-data-wickham.png) -->
+
+<!-- :::{.aside} -->
+
+<!-- [R for Data Science, Wickham H and Grolemund G](https://r4ds.had.co.nz/index.html) © Wickham, Grolemund 2017 -->
+<!-- ::: -->
+
+## Long and wide data formats 
+
+::: {layout="[[40,-10, 50]]" layout-valign="bottom"}
+
+
+![](img/pivot/long.PNG)
+
+
+![](img/pivot/wide.PNG)
+
+::: 
+
+## From long to wide 
+
+![](img/pivot/pivot_wider.PNG)
+
+## Exporting SAFI data
+```{r}
+#| eval: false
+
+interviews_plotting <- interviews %>%
+  ## pivot wider by items_owned
+  separate_rows(items_owned, sep = ";") %>%
+  ## if there were no items listed, changing NA to no_listed_items
+  replace_na(list(items_owned = "no_listed_items")) %>%
+  mutate(items_owned_logical = TRUE) %>%
+  pivot_wider(names_from = items_owned,
+              values_from = items_owned_logical,
+              values_fill = list(items_owned_logical = FALSE)) %>%
+  ## pivot wider by months_lack_food
+  separate_rows(months_lack_food, sep = ";") %>%
+  mutate(months_lack_food_logical = TRUE) %>%
+  pivot_wider(names_from = months_lack_food,
+              values_from = months_lack_food_logical,
+              values_fill = list(months_lack_food_logical = FALSE)) %>%
+  ## add some summary columns
+  mutate(number_months_lack_food = rowSums(select(., Jan:May))) %>%
+  mutate(number_items = rowSums(select(., bicycle:car)))
+
+## save the dataframe to our data_output directory
+write_csv(interviews_plotting, file = here("data_output/interviews_plotting.csv"))
+
+```
 
