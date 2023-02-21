@@ -21,20 +21,31 @@ knitr::opts_chunk$set(
 ```
 
 # Before starting teaching
-- Wait until the other instructor stops teaching ( check with them)
+- Open notes on the tablet
+- Open notes on the computer
+- Open slides on the computer 
+- Open R studio - `live_notes` project
+
+## Prepare setup
+
+## Prepare `gitautopush`
+- Prepare the file with libraries and `interviews` dataset loaded
 - Go to the repository folder: ` cd /path/to/my/repo/folder` 
+- Wait until the other instructor stops teaching ( check with them)
 - Pull the changes (`git pull`)
 - Add [SSH agent](https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase):  `eval $(ssh-agent)`,  followed by `ssh-add` in your terminal
 - In terminal, start observing the folder : `gitautopush`
 - Save changes often with `Ctrl+S`
-- Once you finished, close `gitautopush` with `Ctrl+C`  
+- Once you finished, close `gitautopush` with `Ctrl+C` 
+- Save the script as `data-wrangling.R`
+
 
 # Introduction
 
 - Introduce myself
 - Remind of github repository 
    - I will create a new script `data-wrangling.R` in `scripts` folder!
-   -refresh to see the code
+   - refresh to see the code
 - I will avoid long comments  
    - the notes are to catch-up if you're lost 
    - you will find more explanation on Data Carpentry website

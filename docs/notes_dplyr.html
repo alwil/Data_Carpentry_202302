@@ -109,7 +109,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#before-starting-teaching" id="toc-before-starting-teaching" class="nav-link active" data-scroll-target="#before-starting-teaching">Before starting teaching</a></li>
+  <li><a href="#before-starting-teaching" id="toc-before-starting-teaching" class="nav-link active" data-scroll-target="#before-starting-teaching">Before starting teaching</a>
+  <ul class="collapse">
+  <li><a href="#prepare-setup" id="toc-prepare-setup" class="nav-link" data-scroll-target="#prepare-setup">Prepare setup</a></li>
+  <li><a href="#prepare-gitautopush" id="toc-prepare-gitautopush" class="nav-link" data-scroll-target="#prepare-gitautopush">Prepare <code>gitautopush</code></a></li>
+  </ul></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#data-wrangling-with-dplyr-1045---1145" id="toc-data-wrangling-with-dplyr-1045---1145" class="nav-link" data-scroll-target="#data-wrangling-with-dplyr-1045---1145">Data Wrangling with dplyr 10:45 - 11:45</a>
   <ul class="collapse">
@@ -178,14 +182,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="before-starting-teaching" class="level1">
 <h1>Before starting teaching</h1>
 <ul>
-<li>Wait until the other instructor stops teaching ( check with them)</li>
+<li>Open notes on the tablet</li>
+<li>Open notes on the computer</li>
+<li>Open slides on the computer</li>
+<li>Open R studio - <code>live_notes</code> project</li>
+</ul>
+<section id="prepare-setup" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-setup">Prepare setup</h2>
+</section>
+<section id="prepare-gitautopush" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-gitautopush">Prepare <code>gitautopush</code></h2>
+<ul>
+<li>Prepare the file with libraries and <code>interviews</code> dataset loaded</li>
 <li>Go to the repository folder: <code>cd /path/to/my/repo/folder</code></li>
+<li>Wait until the other instructor stops teaching ( check with them)</li>
 <li>Pull the changes (<code>git pull</code>)</li>
 <li>Add <a href="https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase">SSH agent</a>: <code>eval $(ssh-agent)</code>, followed by <code>ssh-add</code> in your terminal</li>
 <li>In terminal, start observing the folder : <code>gitautopush</code></li>
 <li>Save changes often with <code>Ctrl+S</code></li>
 <li>Once you finished, close <code>gitautopush</code> with <code>Ctrl+C</code></li>
+<li>Save the script as <code>data-wrangling.R</code></li>
 </ul>
+</section>
 </section>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
@@ -193,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Introduce myself</li>
 <li>Remind of github repository
 <ul>
-<li>I will create a new script <code>data-wrangling.R</code> in <code>scripts</code> folder! -refresh to see the code</li>
+<li>I will create a new script <code>data-wrangling.R</code> in <code>scripts</code> folder!</li>
+<li>refresh to see the code</li>
 </ul></li>
 <li>I will avoid long comments
 <ul>
