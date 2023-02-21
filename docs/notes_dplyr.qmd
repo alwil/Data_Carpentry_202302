@@ -21,12 +21,13 @@ knitr::opts_chunk$set(
 ```
 
 # Before starting teaching
+
+## Prepare setup
+
 - Open notes on the tablet
 - Open notes on the computer
 - Open slides on the computer 
 - Open R studio - `live_notes` project
-
-## Prepare setup
 
 ## Prepare `gitautopush`
 - Prepare the file with libraries and `interviews` dataset loaded
