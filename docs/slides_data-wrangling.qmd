@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
   )
 ```
 
-## What is data manipulation?
+## What is data wrangling?
 
 > **Data wrangling** is the process of reshaping data from its raw format, into a format that is suitable for analysis.
 
