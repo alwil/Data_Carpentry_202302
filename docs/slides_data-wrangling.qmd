@@ -121,6 +121,8 @@ countdown::countdown(minutes = 8)
 
 1) How many households in the survey have an average of two meals per day? 
 
+. . .
+
 ```{r}
 #| eval: false
 
@@ -128,8 +130,11 @@ interviews %>%
   count(no_meals)
 ```
 
+. . .
 
 2) Find the mean, min, and max number of household members for each village. Add the number of observations.
+
+. . .
 
 ```{r}
 #| eval: false
