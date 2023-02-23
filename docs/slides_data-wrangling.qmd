@@ -43,7 +43,7 @@ knitr::opts_chunk$set(
 
 <!-- ::: -->
 
-## Exercise 1: `r emo::ji("clock")` **3 mins**
+## Exercise 1: `r emo::ji("clock")` **5 mins**
 
 - subset the `interviews` data to include interviews where respondents were members of an irrigation association (`memb_assoc`); 
 - retain only the columns `affect_conflicts`, `liv_count`, and `no_meals`;
@@ -53,7 +53,7 @@ knitr::opts_chunk$set(
 ```{r}
 #| echo: false
 #| cache: false
-countdown::countdown(minutes = 3)
+countdown::countdown(minutes = 5)
 ```
 
 . . .
@@ -98,7 +98,7 @@ interviews %>%
   select(village, total_meals)
 ```
 
-## Exercise 3: `r emo::ji("clock")` **7 mins**
+## Exercise 3: `r emo::ji("clock")` **8 mins**
 
 1) How many households in the survey have an average of two meals per day? Three meals per day? Are there any other numbers of meals represented?
 
@@ -107,7 +107,7 @@ interviews %>%
 ```{r}
 #| echo: false
 #| cache: false
-countdown::countdown(minutes = 7)
+countdown::countdown(minutes = 8)
 ```
 
 
